@@ -26,12 +26,12 @@
             <div class="page-content col-md-12">
               <h1>Hello, Yahoo! API</h1>
               <h2>Parse</h2>
-              <form class="form-inline">
+              <form class="form-inline" action="#">
                 <div class="form-group">
                   <label class="sr-only" for="parsetext">Text</label>
-                  <input type="text" class="form-control" id="parsetext" placeholder="sentence" name="sentence" />
+                  <input type="text" class="form-control" id="parsetext" placeholder="sentence" name="sentence" tabindex="1" />
                 </div>
-                <input class="btn btn-default" type="button" id="execute" value="Submit" />
+                <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
               </form>
               <hr />
 	      <h2>Result</h2>
