@@ -27,5 +27,22 @@ class YahooAPI {
 
            return $result;
       }
+      public function parse($sentence) {
+      	     $api = 'http://jlp.yahooapis.jp/MAService/V1/parse';
+      	     $params = array(
+	             'results' => 'ma',
+	     	     'sentence' => $sentence
+	     );
+	     $ch = curl_init($api.'?'.http_build_query($params));
+	     curl_setopt_array($ch, array(
+	        CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_USERAGENT => "Yahoo AppID: $this->appid"
+	     ));
+
+	     $result = curl_exec($ch);
+	     curl_close($ch);
+
+           return $result;
+      }
 }
 ?>
