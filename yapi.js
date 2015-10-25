@@ -22,19 +22,39 @@ function errorHandler(args) {
 // DOMを全て読み込んだあとに実行される
 $(function () {
     // 「#execute」をクリックしたとき
-    $('#execute').click(function () {
+    $('#execute').click(function (e) {
         // Ajax通信を開始する
         $.ajax({
             url: 'yapi.php',
             type: 'post', // getかpostを指定(デフォルトは前者)
-            dataType: 'text', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
+            dataType: 'xml', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
                 sentence: $('#parsetext').val()
             }
         })
         // ・ステータスコードは正常で、dataTypeで定義したようにパース出来たとき
         .done(function (response) {
-            $('#result_parse').text(response);
+	    $('#result_parse').empty();
+	    $('<p>'+$('#parsetext').val()+'</p>').appendTo('#result_parse');
+	    $('<table id="result_table" class="table table-striped">').appendTo('#result_parse');
+	    $('<tr>' +
+	      '<th>Surface</th>' +
+	      '<th>Reading</th>' +
+	      '<th>Pos</th>' +
+	      '</tr>'
+	     ).appendTo('#result_table');
+	    $(response).find('word').each(function() {
+		var $surface = $(this).find('surface').text();
+		var $reading = $(this).find('reading').text();
+		var $pos = $(this).find('pos').text();
+		$('<tr>' +
+		  '<td>'+$surface+'</td>' +
+		  '<td>'+$reading+'</td>' +
+		  '<td>'+$pos+'</td>' +
+		  '</tr>'
+		 ).appendTo('#result_table');
+	    });
+	    $('</table>').appendTo('#result_parse');
         })
         // ・サーバからステータスコード400以上が返ってきたとき
         // ・ステータスコードは正常だが、dataTypeで定義したようにパース出来なかったとき
@@ -44,5 +64,11 @@ $(function () {
             // (PHPのfunc_get_args関数の返り値のようなもの)
             $('#result_kousei').text(errorHandler(arguments));
         });
+    });
+    $('#parsetext').on("keypress", function(e){
+	if (e.keyCode === 13) {
+	    $('#execute').click();
+	    return e.which !== 13;
+	}
     });
 });

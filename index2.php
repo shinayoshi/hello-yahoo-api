@@ -25,7 +25,7 @@
           <div class="row">
             <div class="page-content col-md-12">
               <h1>Hello, Yahoo! API</h1>
-              <h2>1. Parse</h2>
+              <h2>Parse</h2>
               <form class="form-inline">
                 <div class="form-group">
                   <label class="sr-only" for="parsetext">Text</label>
@@ -34,7 +34,8 @@
                 <input class="btn btn-default" type="button" id="execute" value="Submit" />
               </form>
               <hr />
-              <pre id="result_parse"></pre>
+	      <h2>Result</h2>
+	      <div id="result_parse"></div>
             </div>
           </div>
         </div>
