@@ -1,7 +1,7 @@
 <?php
-header('Content-Type: application/json');
+header('Content-Type: application/xml');
 
-require( dirname(__FILE__).'/libs/YahooAPI.class.php');
+require( dirname(__FILE__).'/YahooAPI.class.php');
 
 $sentence = htmlspecialchars($_POST['sentence']);
 
