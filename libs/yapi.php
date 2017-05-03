@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: application/xml');
 
-require( dirname(__FILE__).'/YahooAPI.class.php');
+$ini = parse_ini_file('../configs/yapi.ini');
+require(dirname(__FILE__).'/YahooAPI.class.php');
 
 $sentence = htmlspecialchars($_POST['sentence']);
 
-$appid = 'dj0zaiZpPU0ya3d3QXJSS2lrMSZzPWNvbnN1bWVyc2VjcmV0Jng9MTE-';
+$appid = $ini['appid'];
 $yapi = new YahooAPI($appid);
 $data = $yapi->parse($sentence);
 

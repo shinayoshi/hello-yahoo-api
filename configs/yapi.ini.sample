@@ -1,3 +1,4 @@
-copyright = 'Your site copyright'
-title = 'Your site name'
-appid = 'Yahoo! API's AppID'
+[common]
+copyright = "Your site copyright"
+title = "Your site name"
+appid = "Yahoo! API's AppID"
